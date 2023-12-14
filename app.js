@@ -24,5 +24,5 @@ app.all("/*", (req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log("Server Listening on PORT:", process.env.PORT);
+  console.log("Server listening on port:", process.env.PORT);
 });
