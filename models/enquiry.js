@@ -9,6 +9,7 @@ const {
   AWS_REGION,
   AWS_ACCESS_KEY,
   AWS_SECRET_ACCESS_KEY,
+  PERSONAL_EMAIL,
 } = process.env;
 
 const client = new SESv2Client({
@@ -20,22 +21,33 @@ const client = new SESv2Client({
 });
 
 exports.sendEmail = async (body) => {
-  console.log("🚀 ~ file: enquiry.js:23 ~ exports.sendEmail= ~ body:", body);
   const input = {
     FromEmailAddress: SENDER_EMAIL,
     Destination: {
-      ToAddresses: [ADMIN_DESTINATION_EMAIL, "ranjeetsidhu7433@gmail.com"],
+      ToAddresses: [ADMIN_DESTINATION_EMAIL, PERSONAL_EMAIL],
     },
     ReplyToAddresses: [ADMIN_DESTINATION_EMAIL],
     FeedbackForwardingEmailAddress: ADMIN_DESTINATION_EMAIL,
     Content: {
       Simple: {
         Subject: {
-          Data: "New Booking",
+          Data: "New Enquiry",
         },
         Body: {
           Html: {
-            Data: "<h1>Emails are working!</h1>",
+            Data: `
+            
+            <h4>You have recieved a new enquiry</h4>
+            <br/><br/>
+            <p>Name: ${body.first_name} ${body.last_name}</p>
+            <p>Message: ${body.message}</p>
+            <p>Email: ${body.email}</p>
+            <p>Phone: ${body.phone}</p>
+            <br/>
+
+            Date: ${new Date().toDateString()}
+            
+            `,
           },
         },
       },
@@ -44,5 +56,4 @@ exports.sendEmail = async (body) => {
 
   const command = new SendEmailCommand(input);
   client.send(command);
-  // .then((response) => console.log(response));
 };
