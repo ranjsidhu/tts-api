@@ -24,8 +24,7 @@ exports.sendEmail = async (body) => {
   const input = {
     FromEmailAddress: SENDER_EMAIL,
     Destination: {
-      // ToAddresses: [ADMIN_DESTINATION_EMAIL],
-      ToAddresses: ["ranjeetsidhu7433@gmail.com"],
+      ToAddresses: [ADMIN_DESTINATION_EMAIL, "ranjeetsidhu7433@gmail.com"],
     },
     ReplyToAddresses: [ADMIN_DESTINATION_EMAIL],
     FeedbackForwardingEmailAddress: ADMIN_DESTINATION_EMAIL,
@@ -36,14 +35,14 @@ exports.sendEmail = async (body) => {
         },
         Body: {
           Html: {
-            Data: "<h1>This is a test html email</h1>",
+            Data: "<h1>Emails are working!</h1>",
           },
         },
       },
     },
   };
 
-  //   const command = new SendEmailCommand(input);
-  //   client.send(command);
+  const command = new SendEmailCommand(input);
+  client.send(command);
   // .then((response) => console.log(response));
 };
