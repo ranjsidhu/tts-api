@@ -1,6 +1,3 @@
-const dotenv = require("dotenv");
-const path = require("path");
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
 const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2");
 
 const {

@@ -1,6 +1,6 @@
 const { sendEmail } = require("../models/enquiry");
 
-exports.sendAWSEmail = async (req, res, next) => {
+exports.sendAWSEmail = async (req, res) => {
   await sendEmail({ ...req.body })
     .then(() => {
       res.status(200).send({ message: "Successfully sent email" });
