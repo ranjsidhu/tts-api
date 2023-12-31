@@ -21,7 +21,8 @@ exports.sendEmail = async (body) => {
   const input = {
     FromEmailAddress: SENDER_EMAIL,
     Destination: {
-      ToAddresses: [ADMIN_DESTINATION_EMAIL, PERSONAL_EMAIL],
+      // ToAddresses: [ADMIN_DESTINATION_EMAIL, PERSONAL_EMAIL],
+      ToAddresses: ["ranjeetsidhu7433@gmail.com"],
     },
     ReplyToAddresses: [ADMIN_DESTINATION_EMAIL],
     FeedbackForwardingEmailAddress: ADMIN_DESTINATION_EMAIL,
