@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 app.use("/enquiry", enquiryRouter);
-app.use("/stellar", stellarRouter);
+app.use("/api/stellar", stellarRouter);
 // subscribe();
 
 const PORT = process.env.PORT || 5000;
