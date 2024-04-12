@@ -6,6 +6,7 @@ const {
 exports.fetchTestimonials = async (req, res) => {
   try {
     const data = await getTestimonials();
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.status(200).send({ data });
   } catch (error) {
     res.status(500).send({ error: error.message });
