@@ -1,7 +1,4 @@
-const { createClient } = require("@supabase/supabase-js");
-
-const { DB_URL, DB_API_ANON_KEY } = process.env;
-const supabase = createClient(DB_URL, DB_API_ANON_KEY);
+const supabase = require("../../utils/db-client");
 
 exports.postJob = async (job) => {
   try {

@@ -1,11 +1,8 @@
-const { createClient } = require("@supabase/supabase-js");
+const supabase = require("./db-client");
 const { sendEmail } = require("../utils/sendEmail");
 
-const { DB_URL, DB_API_ANON_KEY } = process.env;
-const client = createClient(DB_URL, DB_API_ANON_KEY);
-
 const subscribe = () => {
-  client
+  supabase
     .channel("schema-db-changes")
     .on(
       "postgres_changes",
