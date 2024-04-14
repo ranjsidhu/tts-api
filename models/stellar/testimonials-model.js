@@ -1,10 +1,8 @@
-const supabase = require("../../utils/db-client");
-const { from } = supabase;
+const common = require("../../utils/common");
 
 exports.getTestimonials = async () => {
   try {
-    const { data, error } = await supabase.from("testimonials").select();
-    if (error) throw error;
+    const data = await common.get("testimonials");
     return data;
   } catch (error) {
     throw new Error(error.message);
@@ -13,10 +11,7 @@ exports.getTestimonials = async () => {
 
 exports.createTestimonial = async (testimonial) => {
   try {
-    const { data, error } = await supabase
-      .from("testimonials")
-      .insert([testimonial]);
-    if (error) throw error;
+    const data = await common.create("testimonials", testimonial);
     return data;
   } catch (error) {
     throw new Error(error.message);

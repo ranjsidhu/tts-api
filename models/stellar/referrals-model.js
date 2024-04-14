@@ -1,12 +1,9 @@
-const supabase = require("../../utils/db-client");
+const common = require("../../utils/common");
 
 exports.getReferrals = async () => {
   try {
-    const { data, error } = await supabase.from("referrals").select();
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
+    const referrals = await common.get("referrals");
+    return referrals;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -14,14 +11,8 @@ exports.getReferrals = async () => {
 
 exports.getReferralDetails = async (id) => {
   try {
-    const { data, error } = await supabase
-      .from("referrals")
-      .select()
-      .eq("id", id);
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
+    const referral = await common.getDetails("referrals", id);
+    return referral;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -29,11 +20,8 @@ exports.getReferralDetails = async (id) => {
 
 exports.postReferral = async (referral) => {
   try {
-    const { data, error } = await supabase.from("referrals").insert([referral]);
+    const data = await common.create("referrals", referral);
     //   TODO - send email to user and admin
-    if (error) {
-      throw new Error(error.message);
-    }
     return data;
   } catch (error) {
     throw new Error(error.message);
@@ -42,14 +30,7 @@ exports.postReferral = async (referral) => {
 
 exports.deleteReferral = async (id) => {
   try {
-    const { data, error } = await supabase
-      .from("referrals")
-      .delete()
-      .eq("id", id);
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
+    await common.remove("referrals", id);
   } catch (error) {
     throw new Error(error.message);
   }
